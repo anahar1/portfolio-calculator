@@ -1,40 +1,32 @@
 import React, { useState } from 'react';
 import { addUser } from './firebase.js';
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Tasks from './Tasks.js';
 
 const App = () => {
   const [name, setName] = useState('');
-  const [navigation, setNavigation] = useState(false);
+  const navigate = useNavigate();
 
-  function handleSubmit(event) {
-    event.preventDefault();
+  function handleSubmit() {
     
-    addUser(name).then(() => {
-      setName('');
-      setNavigation(true);
-    }).catch((error) => {
-      console.log('Error adding name to Firestore', error);
-    });
+    addUser(name);
+    setName('');
+    navigate('/tasks');
   };
 
   return (
-    <>
-      {navigation ? (
-        <Navigate to="/tasks" />
-      ) : (
-        <form onSubmit={handleSubmit}>
-          <label>
-            Name:
-            <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
-          </label>
-          <button type="submit">Add Name</button>
-        </form>
-      )}
-      <Routes>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Name:
+          <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+        </label>
+        <button type="submit">Add Name</button>
+        <Routes>
         <Route path='/tasks' element={<Tasks />} />
       </Routes>
-    </>
+      </form>
+    </div>
   );
 };
 
