@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, doc, setDoc } from "@firebase/firestore";
+import { getFirestore, doc, updateDoc, setDoc, getDoc } from "@firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBu_YDzWh-TkstCf08Jjrp6lL-R5kXewBs",
@@ -18,8 +18,23 @@ const firestore = getFirestore(app);
 export const addUser = async (name) => {
   try {
     const docRef = doc(firestore, "TaskManager", "data");
-    await setDoc(docRef, { [name]: {} }, { merge: true });
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+      if (!data[name]) {
+        await updateDoc(docRef, {
+          [name]: {}
+        });
+      } else {
+        console.log(`Name '${name}' already exists in Firestore.`);
+      }
+    } else {
+      await setDoc(docRef, {
+        [name]: {}
+      });
+    }
   } catch (error) {
-    console.log('Error saving user data to Firestore', error);
+    console.log('Error adding name to Firestore', error);
   }
 };
