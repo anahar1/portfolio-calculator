@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, doc, updateDoc, setDoc, getDoc } from "@firebase/firestore";
+import { getFirestore, doc, updateDoc, setDoc, getDoc, collection, addDoc } from "@firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBu_YDzWh-TkstCf08Jjrp6lL-R5kXewBs",
@@ -9,7 +9,7 @@ const firebaseConfig = {
   messagingSenderId: "15103337115",
   appId: "1:15103337115:web:4a58d80586f1b12e999c3e",
   measurementId: "G-PK5VE4BXF6"
-};
+  };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -38,3 +38,18 @@ export const addUser = async (name) => {
     console.log('Error adding name to Firestore', error);
   }
 };
+
+export const addTask = async ({ date, title, description, status }) => {
+  try {
+    console.log('Adding task for name:', title);
+    const userDocRef = doc(firestore, "TaskManager", "data", title);
+    await addDoc(collection(userDocRef, "tasks"), {
+      date,
+      description,
+      status
+    });
+  } catch (error) {
+    console.log('Error adding task to Firestore', error);
+  }
+};
+
