@@ -21,7 +21,7 @@ const App = () => {
         <Route
           path="/"
           element={
-            <form className="loginForm" onSubmit={handleLoginSubmit}>
+            <form className="loginForm" onSubmit={handleSubmit}>
               <h1>Task Tracker</h1>
               <div className="form-control">
                 <label htmlFor="name">Name:</label>
