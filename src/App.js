@@ -1,31 +1,52 @@
-import React, { useState } from 'react';
-import { addUser } from './firebase.js';
+import React, { useState } from "react";
+import { addUser } from "./firebase.js";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import Tasks from './Tasks.js';
+import Tasks from "./Tasks.js";
+import "./App.css";
 
 const App = () => {
-  const [name, setName] = useState('');
+  const [name, setName] = useState("");
+
   const navigate = useNavigate();
 
-  function handleSubmit() {
-    
+  function handleSubmit(e) {
+    e.preventDefault();
     addUser(name);
-    setName('');
-    navigate('/tasks');
-  };
+    navigate("/tasks");
+  }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Name:
-          <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
-        </label>
-        <button type="submit">Add Name</button>
-        <Routes>
-        <Route path='/tasks' element={<Tasks />} />
+    <div className="container">
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <form className="loginForm" onSubmit={handleSubmit}>
+              <h1>Task Tracker</h1>
+              <div className="form-control">
+                <label htmlFor="name">Name:</label>
+                <input
+                  type="text"
+                  id="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+              <button type="submit" className="btn">
+                Log In
+              </button>
+            </form>
+          }
+        />
+        <Route
+          path="/tasks"
+          element={
+            <>
+              <Tasks name={name} />
+            </>
+          }
+        />
       </Routes>
-      </form>
     </div>
   );
 };
