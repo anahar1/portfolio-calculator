@@ -1,5 +1,15 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, doc, updateDoc, setDoc, getDoc } from "@firebase/firestore";
+import {
+  getFirestore,
+  doc,
+  updateDoc,
+  setDoc,
+  getDoc,
+  collection,
+  addDoc,
+  getDocs,
+  deleteDoc,
+} from "@firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBu_YDzWh-TkstCf08Jjrp6lL-R5kXewBs",
@@ -8,7 +18,7 @@ const firebaseConfig = {
   storageBucket: "lighthall-challenge-2.appspot.com",
   messagingSenderId: "15103337115",
   appId: "1:15103337115:web:4a58d80586f1b12e999c3e",
-  measurementId: "G-PK5VE4BXF6"
+  measurementId: "G-PK5VE4BXF6",
 };
 
 // Initialize Firebase
@@ -24,17 +34,72 @@ export const addUser = async (name) => {
       const data = docSnap.data();
       if (!data[name]) {
         await updateDoc(docRef, {
-          [name]: {}
+          [name]: {},
         });
       } else {
         console.log(`Name '${name}' already exists in Firestore.`);
       }
     } else {
       await setDoc(docRef, {
-        [name]: {}
+        [name]: {},
       });
     }
   } catch (error) {
-    console.log('Error adding name to Firestore', error);
+    console.log("Error adding name to Firestore", error);
   }
+};
+
+export const addTask = async ({ name, date, title, description, status }) => {
+  try {
+    if (name != null && title != null) {
+      console.log("Adding task for name:", name);
+      const userDocRef = doc(firestore, "TaskManager", "data", name, "tasks");
+      await addDoc(collection(userDocRef, "tasks"), {
+        title,
+        date,
+        description,
+        status,
+      });
+
+      const tasksDocRef = collection(userDocRef, "tasks");
+      const snapshot = await getDocs(tasksDocRef);
+      const tasks = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+
+      return tasks;
+    }
+  } catch (error) {
+    console.log("Error adding task to Firestore", error);
+    return [];
+  }
+};
+
+export const getTasks = async (name) => {
+  try {
+    if (name != null) {
+      const userDocRef = doc(firestore, "TaskManager", "data", name, "tasks");
+      const tasksCollRef = collection(userDocRef, "tasks");
+      const snapshot = await getDocs(tasksCollRef);
+      const tasks = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      return tasks;
+    }
+  } catch (error) {
+    console.log("Error fetching tasks from Firestore", error);
+    return [];
+  }
+};
+
+export const deleteTask = async ({ name, taskId }) => {
+  // try {
+  //   console.log("Deleting task with ID:", taskId, "for name:", name);
+  //   const userDocRef = doc(firestore, "TaskManager", "data", name, "tasks", taskId);
+  //   await deleteDoc(userDocRef);
+  //   // Fetch all tasks for the given user
+  //   const tasksDocRef = collection(doc(firestore, "TaskManager", "data", name), "tasks");
+  //   const snapshot = await getDocs(tasksDocRef);
+  //   const tasks = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+  //   return tasks;
+  // } catch (error) {
+  //   console.log("Error deleting task from Firestore", error);
+  //   return [];
+  // }
 };
