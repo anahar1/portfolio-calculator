@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/lighthall-challenge-2/static/css/main.0d39749c.css",
-    "main.js": "/lighthall-challenge-2/static/js/main.ac96eedc.js",
+    "main.css": "/lighthall-challenge-2/static/css/main.7c2da9d2.css",
+    "main.js": "/lighthall-challenge-2/static/js/main.b311fcbe.js",
     "static/js/787.28cb0dcd.chunk.js": "/lighthall-challenge-2/static/js/787.28cb0dcd.chunk.js",
     "index.html": "/lighthall-challenge-2/index.html",
-    "main.0d39749c.css.map": "/lighthall-challenge-2/static/css/main.0d39749c.css.map",
-    "main.ac96eedc.js.map": "/lighthall-challenge-2/static/js/main.ac96eedc.js.map",
+    "main.7c2da9d2.css.map": "/lighthall-challenge-2/static/css/main.7c2da9d2.css.map",
+    "main.b311fcbe.js.map": "/lighthall-challenge-2/static/js/main.b311fcbe.js.map",
     "787.28cb0dcd.chunk.js.map": "/lighthall-challenge-2/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0d39749c.css",
-    "static/js/main.ac96eedc.js"
+    "static/css/main.7c2da9d2.css",
+    "static/js/main.b311fcbe.js"
   ]
 }
