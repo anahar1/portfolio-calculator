@@ -6,6 +6,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 const Form = () => {
   const [startDate, setStartDate] = useState('')
   const [initialBalance, setInitialBalance] = useState('')
+  const [newBalance, setNewBalance] = useState(0)
   const [stocks, setStocks] = useState([])
   const [errorMessage, setErrorMessage] = useState('')
   const [historicalData, setHistoricalData] = useState([])
@@ -74,7 +75,7 @@ const Form = () => {
     console.log(symbols.join(','))
     const endDate = new Date().toISOString().slice(0, 10)
 
-    const response = await axios.get('http://api.marketstack.com/v1/eod', {
+    const response = await axios.get('/api.marketstack.com/v1/eod', {
       params: {
         access_key: apiKey,
         symbols: symbols.join(','),
@@ -117,9 +118,15 @@ const Form = () => {
     return total.toFixed(2);
   };
   
-  
-  
-  
+  // setHistoricalData("Test")
+  //   axios.post('http://127.0.0.1:5000/get_stocks', { stocks: stocks, startDate: startDate, endDate: new Date().toISOString().slice(0, 10), balance: initialBalance })
+  //   .then(response => {
+  //     console.log(response)
+  //     if(response.data.value)
+  //       setNewBalance(response.data.value)
+  //     else
+  //       setNewBalance(response.data)
+  //   })
 
   return (
     <div className="form-container" style={{ marginBottom: '90px' }}>
