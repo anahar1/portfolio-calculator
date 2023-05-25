@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/lighthall-challenge-2/static/css/main.9e7dd05e.css",
-    "main.js": "/lighthall-challenge-2/static/js/main.1fe1b532.js",
-    "static/js/787.28cb0dcd.chunk.js": "/lighthall-challenge-2/static/js/787.28cb0dcd.chunk.js",
-    "index.html": "/lighthall-challenge-2/index.html",
-    "main.9e7dd05e.css.map": "/lighthall-challenge-2/static/css/main.9e7dd05e.css.map",
-    "main.1fe1b532.js.map": "/lighthall-challenge-2/static/js/main.1fe1b532.js.map",
-    "787.28cb0dcd.chunk.js.map": "/lighthall-challenge-2/static/js/787.28cb0dcd.chunk.js.map"
+    "main.css": "/portfolio-calculator/static/css/main.3b017183.css",
+    "main.js": "/portfolio-calculator/static/js/main.398f8230.js",
+    "static/js/787.28cb0dcd.chunk.js": "/portfolio-calculator/static/js/787.28cb0dcd.chunk.js",
+    "index.html": "/portfolio-calculator/index.html",
+    "main.3b017183.css.map": "/portfolio-calculator/static/css/main.3b017183.css.map",
+    "main.398f8230.js.map": "/portfolio-calculator/static/js/main.398f8230.js.map",
+    "787.28cb0dcd.chunk.js.map": "/portfolio-calculator/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9e7dd05e.css",
-    "static/js/main.1fe1b532.js"
+    "static/css/main.3b017183.css",
+    "static/js/main.398f8230.js"
   ]
 }
